@@ -7,14 +7,18 @@ import * as ccxt from 'ccxt';
 import { Exchanges } from '../exchanges/exchanges.entity';
 import { seedCoins } from 'src/coins/coins.seeder';
 import { seedPairs } from 'src/pairs/pairs.seeder';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class SeedersService {
   private logger: Logger = new Logger('db-seeders');
 
   constructor(
+    @InjectRepository(Exchanges)
     private exchanges: Repository<Exchanges>,
+    @InjectRepository(Coins)
     private coins: Repository<Coins>,
+    @InjectRepository(Pairs)
     private pairs: Repository<Pairs>,
   ) {}
 
