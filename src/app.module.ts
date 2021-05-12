@@ -1,4 +1,3 @@
-import { config } from '@blocksuite/common';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -16,7 +15,9 @@ import { SeedersModule } from './seeders/seeders.module';
 import { Prices } from './prices/prices.entity';
 
 const entities = [Coins, Pairs, Prices, Exchanges];
-const factory = async () => ({ ...(await config('db')), entities });
+const dbConfig = {};
+
+const factory = async () => ({ ...dbConfig, entities });
 const typeOrmModule = TypeOrmModule.forRootAsync({ useFactory: factory });
 
 @Module({
